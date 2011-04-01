@@ -1,5 +1,7 @@
 Foghub is a small tool to associate git commits (on Github) with cases in Fogbugz and ask for codereviews.
 
+The code is under development.
+
 Feature plans
 =============
 
