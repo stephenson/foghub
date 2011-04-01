@@ -20,3 +20,5 @@ Ask for codereview and associate with case:
 And commits can be associatet with more then one case:
 
     git commit -am "This commit is closing case #65 and #66"
+  
+If you commit whitout ref to a user it will automaticly make a new case, but it dosent asign it.
