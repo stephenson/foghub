@@ -1,4 +1,4 @@
-Foghub is a small tool to associate git commits (on Github) with cases in Fogbugz and ask for codereviews.
+Foghub associates Git commits with Fogbugz cases and code reviews.
 
 The code is under development.
 
