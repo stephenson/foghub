@@ -6,11 +6,11 @@ Gem::Specification.new do |s|
   s.name        = "foghub"
   s.version     = Foghub::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Simon Hørup Eskildsen"]
+  s.email       = ["se@firmafon.dk"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Foghub associates Git commits with Fogbugz cases and code reviews}
+  s.description = %q{Foghub associates Git commits with Fogbugz cases and code reviews}
 
   s.rubyforge_project = "foghub"
 
