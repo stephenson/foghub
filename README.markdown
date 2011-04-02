@@ -6,6 +6,18 @@ The code is under development.
 
 [Simply read this blogpost](http://www.codinghorror.com/blog/2006/01/code-reviews-just-do-it.html).
 
+# Setup
+
+Foghub is a Sinatra application that can take, and parse, the data given by Github's service hooks.
+
+Clone this repository, and edit `config.yml` to include your Fogbugz credentials.
+
+Deploy Foghub with your configuration file, and set your Github repository's post-recieve URL service hook to:
+
+    yourdomain.com/commit
+
+Each time a commit hits your Github repo, Foghub should take care of getting your commits into Fogbugz.
+
 # Feature plans
 
 Associate commit with case: 
