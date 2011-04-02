@@ -14,24 +14,22 @@ Associate commit with case:
 
     git commit -am "This is a commit #65"
 
-This will post a comment to case 65 on Fogbugz with the commitmassage and a link to the commit on Github.
+This will post a comment to case 65 on Fogbugz with the commit message that references the Git commit on Github.
 
-Ask for codereview:
+Request Fogbugz code review:
 
     git commit -am "This is a commit that needs review #review @user"
 
-This will add a new case in Fogbugz in the category "code review" and assign it to the user.
+Creates a new code review in Fogbugz and assigns it to `@user`. If you do not specify a reviewer, Foghub will simply create an unassigned code review.
 
-Ask for codereview and associate with case:
+Request code review and associate with case:
 
     git commit -am "This commit to case #65 needs #review by @user"
 
-This will add a new case in Fogbugz in the category "code review" and assign it to the user but will also post a comment to case 65 in Fogbugz with the commitmassage and a link to the commit on Github.
+Will create a new code review in Fogbugz and assign it to the user specified in the commit message. Additionally, the commit message will be attached to case 65 in Fogbugz.
 
-And commits can be associatet with more then one case:
+Commits can be associated with multiple Fogbugz cases:
 
     git commit -am "This commit is closing case #65 and #66"
 
-This will post a comment to both case 65 and 66 on Fogbugz with the commitmassage and a link to the commit on Github.
-  
-If you commit whitout ref to a user it will automaticly make a new case, but it dosent asign it.
+Creates a Fogbugz comment with the commit message in case 65 and 66 linking to the commit on Github.
