@@ -2,13 +2,11 @@ Foghub associates Git commits with Fogbugz cases and code reviews.
 
 The code is under development.
 
-Why do code reviews?
-====================
+# Why do code reviews?
 
 [Simply read this blogpost](http://www.codinghorror.com/blog/2006/01/code-reviews-just-do-it.html).
 
-Feature plans
-=============
+# Feature plans
 
 Associate commit with case: 
 
