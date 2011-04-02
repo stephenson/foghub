@@ -2,7 +2,8 @@ source "http://rubygems.org"
 
 gem 'sinatra'
 gem 'rack-test'
-gem 'httparty'
+gem 'typhoeus'
+gem 'crack'
 
 group :development do
   gem 'minitest'
