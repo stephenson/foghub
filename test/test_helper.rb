@@ -1,6 +1,6 @@
-require_relative '../foghub'
-require_relative '../parser'
-require_relative '../fogbugz'
+require_relative '../lib/foghub/foghub'
+require_relative '../lib/foghub/parser'
+require_relative '../lib/foghub/fogbugz/fogbugz'
 
 require 'rubygems'
 gem 'minitest' # ensures you're using the gem, and not the built in MT
