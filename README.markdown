@@ -45,3 +45,7 @@ Commits can be associated with multiple Fogbugz cases:
     git commit -am "This commit is closing case #65 and #66"
 
 Creates a Fogbugz comment with the commit message in case 65 and 66 linking to the commit on Github.
+
+# Copyright
+
+Copyright (c) 2011 Firmafon ApS. This project is licensed under the MIT license, see LICENSE for details.
