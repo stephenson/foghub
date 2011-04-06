@@ -10,7 +10,7 @@ The code is under development.
 
 # Setup
 
-Foghub is a Sinatra application that can take, and parse, the data given by Github's service hooks.
+Foghub is a Sinatra application that can receive, and parse, the data given by Github's service hooks.
 
 Clone this repository, and edit `config.yml` to include your Fogbugz credentials.
 

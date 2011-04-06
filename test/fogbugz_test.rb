@@ -2,7 +2,7 @@ require_relative './test_helper'
 
 class FogbugzHelperMethods < MiniTest::Unit::TestCase
   def setup
-    @fogbugz = Fogbugz.new('http://sample.fogbugz.com', 'sirup@sirup@sirupsen.com.com', 'seekrit')
+    @fogbugz = Fogbugz.new('http://sample.fogbugz.com', 'sirup@sirup@sirupsen.com', 'seekrit')
   end
 
   test "needed attributes are correct" do
