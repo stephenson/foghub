@@ -7,8 +7,9 @@ module Fogbugz
 
     def initialize(options = {})
       @options = {}.merge(options)
+
       raise InitializationError, "Must supply URI (e.g. http://fogbugz.company.com)" unless options[:uri]
-      @http = Fogbugz.adapter[:http].new
+      @http = Fogbugz.adapter[:http].new(:uri => options[:uri])
       @xml = Fogbugz.adapter[:xml].new
     end
 
