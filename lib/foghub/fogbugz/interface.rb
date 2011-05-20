@@ -1,11 +1,13 @@
 module Fogbugz
   class Interface
     class RequestError < StandardError; end
+    class InitializationError < StandardError; end
     
     attr_accessor :options, :http, :xml, :token
 
     def initialize(options = {})
       @options = {}.merge(options)
+      raise InitializationError, "Must supply URI (e.g. http://fogbugz.company.com)" unless options[:uri]
       @http = Fogbugz.adapter[:http].new
       @xml = Fogbugz.adapter[:xml].new
     end
