@@ -27,6 +27,6 @@ class CommitParser
 
   def parse_reviewers
     # INCEPTION
-    @raw_commit.scan(/@(\w+)/).flatten
+    @raw_commit.scan(/@(\w+)/).flatten.map(&:downcase)
   end
 end
