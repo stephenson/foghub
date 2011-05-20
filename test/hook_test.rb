@@ -1,6 +1,7 @@
 require_relative './test_helper'
+require_relative '../lib/foghub/foghub'
 
-class CommitMessage < MiniTest::Unit::TestCase
+class CommitMessage < FogTest
   def app
     Foghub.new
   end

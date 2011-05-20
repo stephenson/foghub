@@ -1,6 +1,7 @@
 require_relative './test_helper'
+require_relative '../lib/foghub/parser'
 
-class Parser < MiniTest::Unit::TestCase
+class Parser < FogTest
   test "test parsing commit with one case should return right case" do
     commit = "Added awesome feature, fixes #42"
     commit = CommitParser.new(commit)

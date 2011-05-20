@@ -1,9 +1,7 @@
-require_relative '../lib/foghub/foghub'
-require_relative '../lib/foghub/parser'
-require_relative '../lib/foghub/fogbugz/fogbugz'
-
 require 'rubygems'
 gem 'minitest' # ensures you're using the gem, and not the built in MT
+$: << File.expand_path(File.dirname(__FILE__) + "../lib")
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'minitest/mock'
@@ -12,7 +10,7 @@ require 'rr'
 
 ENV['RACK_ENV'] = 'test'
 
-class MiniTest::Unit::TestCase
+class FogTest < MiniTest::Unit::TestCase
   include Rack::Test::Methods
   include RR::Adapters::TestUnit
 
