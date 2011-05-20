@@ -1,7 +1,7 @@
 module Fogbugz
   module Adapter
     module HTTP
-      class Typheous
+      class Typhoeus
         attr_accessor :uri
 
         def initialize(options = {})
