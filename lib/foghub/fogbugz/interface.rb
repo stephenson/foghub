@@ -10,7 +10,7 @@ module Fogbugz
 
       raise InitializationError, "Must supply URI (e.g. http://fogbugz.company.com)" unless options[:uri]
       @http = Fogbugz.adapter[:http].new(:uri => options[:uri])
-      @xml = Fogbugz.adapter[:xml].new
+      @xml = Fogbugz.adapter[:xml]
     end
 
     def authenticate
@@ -22,10 +22,13 @@ module Fogbugz
 
     def command(action, parameters = {})
       raise RequestError, 'No token available, #authenticate first' unless @token
-      @http.request action, { 
-        :token  => @token, 
+      parameters[:token] = @token
+
+      response = @http.request action, { 
         :params => parameters.merge(options[:params] || {})
       }
+
+      @xml.parse(response)
     end
   end
 end

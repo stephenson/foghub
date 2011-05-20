@@ -14,10 +14,16 @@ class HTTPMock < MiniTest::Mock
   end
 end
 
+class XMLMock < MiniTest::Mock
+  def self.parse(xml)
+    true
+  end
+end
+
 class BasicInterface < FogTest
   def setup
     Fogbugz.adapter[:http] = HTTPMock
-    Fogbugz.adapter[:xml] = MiniTest::Mock
+    Fogbugz.adapter[:xml] = XMLMock
 
     @fogbugz = Fogbugz::Interface.new(CREDENTIALS)
   end
@@ -28,7 +34,7 @@ class BasicInterface < FogTest
 
   test 'adapters should be mocked' do
     assert_instance_of HTTPMock, @fogbugz.http
-    assert_instance_of MiniTest::Mock, @fogbugz.xml
+    assert_equal XMLMock, @fogbugz.xml
   end
 end
 
@@ -47,7 +53,7 @@ class InterfaceRequests < FogTest
   test 'requesting with an action should send along token and correct parameters' do
     fogbugz = Fogbugz::Interface.new(CREDENTIALS)
     fogbugz.token = 'token'
-    fogbugz.http.expect(:request, true, [:search, {:token => 'token', :params => {:q => 'case'}}])
+    fogbugz.http.expect(:request, "omgxml", [:search, {:params => {:q => 'case', :token => 'token'}}])
     fogbugz.command(:search, :q => 'case')
 
     assert fogbugz.http.verify
