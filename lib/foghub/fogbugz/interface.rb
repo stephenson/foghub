@@ -17,7 +17,7 @@ module Fogbugz
       }
     end
 
-    def command(action, parameters)
+    def command(action, parameters = {})
       raise RequestError, 'No token available, #authenticate first' unless @token
       @http.request(action, :token => @token, :params => parameters)
     end
