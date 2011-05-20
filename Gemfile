@@ -7,5 +7,4 @@ gem 'crack'
 
 group :development do
   gem 'minitest'
-  gem 'rr'
 end
