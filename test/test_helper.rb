@@ -6,6 +6,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require 'minitest/mock'
 require 'rack/test'
+require 'mocha'
 
 ENV['RACK_ENV'] = 'test'
 

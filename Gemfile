@@ -7,4 +7,5 @@ gem 'crack'
 
 group :development do
   gem 'minitest'
+  gem 'mocha'
 end
