@@ -1,5 +1,5 @@
 require_relative './test_helper'
-require_relative '../lib/foghub/parser'
+require 'foghub/parser'
 
 class Parser < FogTest
   test "test parsing commit with one case should return right case" do

@@ -1,5 +1,5 @@
 require 'sinatra'
-require_relative './parser'
+require_relative 'foghub/parser'
 
 class Foghub < Sinatra::Base
   post '/commit' do

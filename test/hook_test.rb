@@ -1,5 +1,5 @@
 require_relative './test_helper'
-require_relative '../lib/foghub/foghub'
+require 'foghub.rb'
 
 class CommitMessage < FogTest
   def app

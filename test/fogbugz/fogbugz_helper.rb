@@ -1,4 +1,4 @@
 require_relative '../test_helper.rb'
-require 'foghub/fogbugz/fogbugz'
-require 'foghub/fogbugz/adapters/xml/cracker'
-require 'foghub/fogbugz/adapters/http/typhoeus'
+require 'fogbugz/fogbugz'
+require 'fogbugz/adapters/xml/cracker'
+require 'fogbugz/adapters/http/typhoeus'
