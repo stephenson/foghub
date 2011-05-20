@@ -9,6 +9,6 @@ module Fogbugz
 
   self.adapter = {
     :xml  => Adapter::XML::Cracker,
-    :http => Adapter::HTTP::Typhoeus
+    :http => Adapter::HTTP::Typhoeuser
   }
 end

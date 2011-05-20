@@ -14,10 +14,14 @@ module Fogbugz
     end
 
     def authenticate
-      @token ||= @http.request :logon, { 
-        :email    => @options[:email],
-        :password => @options[:password]
+      response = @http.request :logon, { 
+        :params => {
+          :email    => @options[:email],
+          :password => @options[:password]
+        }
       }
+
+      @token ||= @xml.parse(response)["token"]
     end
 
     def command(action, parameters = {})

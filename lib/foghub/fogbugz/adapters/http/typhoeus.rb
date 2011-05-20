@@ -1,7 +1,9 @@
+require 'typhoeus'
+
 module Fogbugz
   module Adapter
     module HTTP
-      class Typhoeus
+      class Typhoeuser
         attr_accessor :uri
 
         def initialize(options = {})
@@ -9,8 +11,9 @@ module Fogbugz
         end
 
         def request(action, options)
-          query = Typhoeus::Request.new("#{uri}/api.asp",
-                                        :params => options[:params])
+          params = {:cmd => action}.merge(options[:params])
+          query = Typhoeus::Request.get("#{uri}/api.asp",
+                                        :params => params)
           query.body
         end
       end
