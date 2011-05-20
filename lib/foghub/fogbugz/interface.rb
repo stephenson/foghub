@@ -23,6 +23,7 @@ module Fogbugz
 
       @token ||= @xml.parse(response)["token"]
     end
+    alias :authenticate!, :authenticate
 
     def command(action, parameters = {})
       raise RequestError, 'No token available, #authenticate first' unless @token
