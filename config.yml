@@ -1,0 +1,14 @@
+--- 
+:fogbugz: 
+  :email: sample@example.com
+  :password: seekrit
+  :uri: 'https://company.fogbugz.com'
+:aliases: 
+  1: 
+  - sirupsen
+  - sirup
+  - simon
+  2: 
+  - bob
+  - robert
+  - rob
