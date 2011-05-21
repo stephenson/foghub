@@ -1,5 +1,6 @@
 require_relative './test_helper'
 require 'foghub.rb'
+require 'json'
 
 class CommitMessage < FogTest
   def app
@@ -36,7 +37,7 @@ class CommitMessage < FogTest
       ],
       :after => "de8251ff97ee194a289832576287d6f8ad74e3d0",
       :ref => "refs/heads/master"
-    }
+    }.to_json
   end
 
   test 'when commit has review tag and >= 1 reviwers, it should create a code review for the right person' do
@@ -49,7 +50,13 @@ class CommitMessage < FogTest
 
     app.fogbugz.expects(:command).with(:new, :sPersonAssignedTo => 2)
 
-    post '/commit', github_data('commit with a case #18 #review @sirupsen')
+    post '/commit', :payload => github_data('commit with a case #18 #review @sirupsen')
+  end
+
+  test 'when requesting with no payload it should raise an exception' do
+    assert_raises StandardError do
+      post '/commit', :useless => "data"
+    end
   end
 
   test 'when commit has no review tag it but has fogbugz case it should simply associate with the fogbugz case' do
@@ -58,6 +65,6 @@ class CommitMessage < FogTest
     app.instance = mock()
     app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => commit})
 
-    post '/commit', github_data(commit)
+    post '/commit', :payload => github_data(commit)
   end
 end
