@@ -19,6 +19,7 @@ class Foghub < Sinatra::Base
     @instance
   end
 
+  #TODO Clean this mess
   post '/commit' do
     raise StandardError, "No payload!" unless params[:payload]
     # gsub because sometimes JSOn is just FUCKED
