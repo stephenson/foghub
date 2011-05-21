@@ -48,9 +48,23 @@ class CommitMessage < FogTest
       }
     }
 
-    app.fogbugz.expects(:command).with(:new, {:sPersonAssignedTo => 2, :sCategory => 'Code Review', :sEvent => 'commit with a case #18 #review @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
+    app.fogbugz.expects(:command).with(:new, {:sPersonAssignedTo => 2, :sCategory => 'Code Review', :sEvent => 'commit needs #review by @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
 
-    post '/commit', :payload => github_data('commit with a case #18 #review @sirupsen')
+    post '/commit', :payload => github_data('commit needs #review by @sirupsen')
+  end
+
+  test 'when commit has review tag, reviewer and a case' do
+    app.instance = mock()
+    app.config = {
+      :aliases => {
+        2 => ["sirupsen", "sirup"]
+      }
+    }
+    
+    app.fogbugz.expects(:command).with(:new, {:sPersonAssignedTo => 2, :sCategory => 'Code Review', :sEvent => 'commit for #87 needs #review by @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
+    app.fogbugz.expects(:command).with(:edit, {:ixBug => 87, :sEvent => 'commit for #87 needs #review by @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
+
+    post '/commit', :payload => github_data('commit for #87 needs #review by @sirupsen')
   end
 
   test 'when requesting with no payload it should raise an exception' do
@@ -78,7 +92,7 @@ class CommitMessage < FogTest
       }
     }
 
-    app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => 'commit with a case #18 assign back to @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59', :sPersonAssignedTo => 2})
+    app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => 'commit with a case #18 assign back to @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
 
     post '/commit', :payload => github_data(commit)
   end

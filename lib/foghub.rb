@@ -38,10 +38,11 @@ class Foghub < Sinatra::Base
         }
 
         fogbugz.command(:new, params)
-      elsif commit.cases.length >= 1
+      end
+
+      if commit.cases.length >= 1
         message = "#{raw_commit["message"]} #{raw_commit["url"]}"
         params = {:ixBug => commit.cases.first, :sEvent => message}
-        params[:sPersonAssignedTo] = commit.reviewer_ids.first unless commit.reviewers.empty?
 
         fogbugz.command(:edit, params)
       end
