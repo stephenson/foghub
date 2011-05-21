@@ -41,11 +41,13 @@ class Foghub < Sinatra::Base
         fogbugz.command(:new, params)
       end
 
-      if commit.cases.length >= 1
-        message = "#{raw_commit["message"]} #{raw_commit["url"]}"
-        params = {:ixBug => commit.cases.first, :sEvent => message}
+      unless commit.cases.empty?
+        commit.cases.each do |case_id|
+          message = "#{raw_commit["message"]} #{raw_commit["url"]}"
+          params = {:ixBug => case_id, :sEvent => message}
 
-        fogbugz.command(:edit, params)
+          fogbugz.command(:edit, params)
+        end
       end
     end
     
