@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'json'
+require 'fogbugz'
 require_relative './foghub/parser'
-require_relative './fogbugz/fogbugz'
 
 class Foghub < Sinatra::Base
   attr_accessor :instance, :config

@@ -1,11 +1,12 @@
 source "http://rubygems.org"
 
 gem 'sinatra'
-gem 'rack-test'
 gem 'typhoeus'
 gem 'crack'
+gem 'ruby-fogbugz'
 
 group :development do
   gem 'minitest'
   gem 'mocha'
+  gem 'rack-test'
 end
