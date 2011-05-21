@@ -31,7 +31,8 @@ class Foghub < Sinatra::Base
       if commit.review? && commit.reviewers.length >= 1
         fogbugz.command(:new, :sPersonAssignedTo => commit.reviewer_ids.first)
       elsif commit.cases.length >= 1
-        fogbugz.command(:edit, :ixBug => commit.cases.first, :sEvent => raw_commit["message"])
+        message = "#{raw_commit["message"]} #{raw_commit["url"]}"
+        fogbugz.command(:edit, :ixBug => commit.cases.first, :sEvent => message)
       end
     end
     

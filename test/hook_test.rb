@@ -63,7 +63,7 @@ class CommitMessage < FogTest
     commit = 'commit with a case #18'
 
     app.instance = mock()
-    app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => commit})
+    app.fogbugz.expects(:command)
 
     post '/commit', :payload => github_data(commit)
   end
