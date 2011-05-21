@@ -48,7 +48,7 @@ class CommitMessage < FogTest
       }
     }
 
-    app.fogbugz.expects(:command).with(:new, :sPersonAssignedTo => 2)
+    app.fogbugz.expects(:command).with(:new, {:sPersonAssignedTo => 2, :sCategory => 'Code Review', :sEvent => 'commit with a case #18 #review @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
 
     post '/commit', :payload => github_data('commit with a case #18 #review @sirupsen')
   end
@@ -63,7 +63,22 @@ class CommitMessage < FogTest
     commit = 'commit with a case #18'
 
     app.instance = mock()
-    app.fogbugz.expects(:command)
+    app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => 'commit with a case #18 http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59'})
+
+    post '/commit', :payload => github_data(commit)
+  end
+
+  test 'when commit mentions a user and a case it should assign the case to the mentioned user' do
+    commit = 'commit with a case #18 assign back to @sirupsen'
+
+    app.instance = mock()
+    app.config = {
+      :aliases => {
+        2 => ["sirupsen", "sirup"]
+      }
+    }
+
+    app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => 'commit with a case #18 assign back to @sirupsen http://github.com/firmafon/foghub/commit/41a212ee83ca127e3c8cf465891ab7216a705f59', :sPersonAssignedTo => 2})
 
     post '/commit', :payload => github_data(commit)
   end

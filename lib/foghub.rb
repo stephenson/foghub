@@ -29,10 +29,21 @@ class Foghub < Sinatra::Base
       commit.aliases = config[:aliases]
 
       if commit.review? && commit.reviewers.length >= 1
-        fogbugz.command(:new, :sPersonAssignedTo => commit.reviewer_ids.first)
+        message = "#{raw_commit["message"]} #{raw_commit["url"]}"
+
+        params = {
+          :sPersonAssignedTo => commit.reviewer_ids.first,
+          :sCategory => "Code Review",
+          :sEvent => message
+        }
+
+        fogbugz.command(:new, params)
       elsif commit.cases.length >= 1
         message = "#{raw_commit["message"]} #{raw_commit["url"]}"
-        fogbugz.command(:edit, :ixBug => commit.cases.first, :sEvent => message)
+        params = {:ixBug => commit.cases.first, :sEvent => message}
+        params[:sPersonAssignedTo] = commit.reviewer_ids.first unless commit.reviewers.empty?
+
+        fogbugz.command(:edit, params)
       end
     end
     
