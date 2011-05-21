@@ -12,7 +12,9 @@ The code is under development.
 
 Foghub is a Sinatra application that can receive, and parse, the data given by Github's service hooks.
 
-Clone this repository, and edit `config.yml` to include your Fogbugz credentials and aliases. Aliases are names you can use in your commits, e.g. @user, that'll be attached to a certain Fogbugz user id.
+Clone this repository, and edit `config.yml` to include your Fogbugz credentials and user aliases. 
+
+Aliases are aliases you can use in your commits to assign cases to other users, e.g. @user. However, for aliases to work you need to specify what aliases goes to what Fogbugz user IDs, this is done in `config.yml`. You can get a list of user IDs by running `ruby scripts/users.rb` once the Fogbugz credentials are in place.
 
 Deploy Foghub with your configuration file, and set your Github repository's post-recieve URL service hook to:
 
