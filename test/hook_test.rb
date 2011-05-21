@@ -3,7 +3,7 @@ require 'foghub.rb'
 
 class CommitMessage < FogTest
   def app
-    Foghub.new
+    @app ||= Foghub.new
   end
 
   def github_data(message)
@@ -39,9 +39,25 @@ class CommitMessage < FogTest
     }
   end
 
-  def test_webhook_success
-    post '/commit', github_data('useless commit')
+  test 'when commit has review tag and >= 1 reviwers, it should create a code review for the right person' do
+    app.instance = mock()
+    app.config = {
+      :aliases => {
+        2 => ["sirupsen", "sirup"]
+      }
+    }
 
-    assert last_response.ok?
+    app.fogbugz.expects(:command).with(:new, :sPersonAssignedTo => 2)
+
+    post '/commit', github_data('commit with a case #18 #review @sirupsen')
+  end
+
+  test 'when commit has no review tag it but has fogbugz case it should simply associate with the fogbugz case' do
+    commit = 'commit with a case #18'
+
+    app.instance = mock()
+    app.fogbugz.expects(:command).with(:edit, {:ixBug => 18, :sEvent => commit})
+
+    post '/commit', github_data(commit)
   end
 end

@@ -20,6 +20,10 @@ Deploy Foghub with your configuration file, and set your Github repository's pos
 
 Each time a commit hits your Github repo, Foghub should take care of getting your commits into Fogbugz.
 
+## Assigning
+
+In `alias.yml` you can set up aliases for your employees.
+
 # Feature plans
 
 Associate commit with case: 

@@ -1,4 +1,6 @@
 class CommitParser
+  attr_accessor :aliases
+
   def initialize(commit)
     @raw_commit = commit
   end
@@ -10,6 +12,21 @@ class CommitParser
   def review?
     @review ||= parse_review
   end
+
+  def reviewer_ids
+    ids = []
+
+    # Unsure how to return from #each to #map
+    # thus not using #map
+    reviewers.each do |reviewer_alias|
+      @aliases.each do |id, aliases|
+        ids << id if aliases.index(reviewer_alias)
+      end
+    end
+
+    ids
+  end
+
 
   def reviewers
     @reviewer ||= parse_reviewers

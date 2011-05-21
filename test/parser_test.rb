@@ -44,10 +44,32 @@ class Parser < FogTest
     assert_equal ['sirupsen', 'mkyed'], commit.reviewers
   end
 
+  test "reviewers should be lowercased" do
+    commit = "Added awesome feature, fixes #42 and #48 #review @SiRuPSEN @mKyeD"
+    commit = CommitParser.new(commit)
+
+    assert_equal ['sirupsen', 'mkyed'], commit.reviewers
+  end
+
   test "test parsing commit should not catch at as empty reviewer" do
     commit = "Added awesome feature @ admin2, fixes #42 and #48 #review @sirupsen @mkyed"
     commit = CommitParser.new(commit)
 
     assert_equal 2, ['sirupsen', 'mkyed'].count
+  end
+
+  test 'associate right aliases with right IDs' do
+    commit = "Added awesome feature @ admin2, fixes #42 and #48 #review @sirupsen @mkyed"
+    commit = CommitParser.new(commit)
+
+    commit.aliases = {
+        2 => ["sirupsen", "sirup"],
+        4 => ["mkyed", "michael", "kyed"],
+        8 => ["harry", "vangberg", "ichverstehe"]
+    }
+
+    ids = commit.reviewer_ids
+
+    assert_equal [2, 4], ids
   end
 end
